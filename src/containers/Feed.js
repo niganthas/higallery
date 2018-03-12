@@ -19,7 +19,6 @@ class Feed extends Component {
 
   render() {
     let { loading, feeds } = this.props.feed.feedList;
-    console.dir(feeds);
     const list = (loading && feeds) ?
         'Loading feed...' :
         feeds.map(feed => <FeedItem key={feed.id} feed={feed}/>)

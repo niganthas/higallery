@@ -5,6 +5,7 @@ import { Container } from 'reactstrap';
 
 import Header from "../../components/Header";
 import Feed from "../Feed";
+import Albums from "../Albums";
 
 class App extends Component {
   render() {
@@ -17,7 +18,7 @@ class App extends Component {
           <Container className='main-container'>
             <Switch>
               <Route exact path='/' component={Feed}/>
-              {/*<Route path='/img' component={ImgView}/>*/}
+              <Route path='/albums' component={Albums}/>
             </Switch>
           </Container>
 

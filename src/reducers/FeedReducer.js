@@ -13,7 +13,6 @@ export default function (state = initialState, action) {
     case FETCH_FEED :
       return {...state, feedList: {feeds:[], error: null, loading: true}}
     case FETCH_FEED_SUCCESS :
-      console.log(action.payload.data)
       return {...state, feedList: { feeds: action.payload.data.items, error: null, loading: false }}
     case FETCH_FEED_FAILURE :
       error = action.payload.data || { message: action.payload.message };

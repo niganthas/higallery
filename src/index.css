@@ -7,3 +7,12 @@ body {
 .main-container {
   padding: 30px;
 }
+
+.albums-list {
+  padding: 30px 0;
+}
+.albums-list__item {
+  border: 2px solid #666;
+  padding: 30px;
+  margin-bottom: 30px;
+}

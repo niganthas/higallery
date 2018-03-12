@@ -23,18 +23,18 @@ export default class Header extends React.Component {
     return (
         <header>
           <Navbar color='dark' dark expand='md'>
-            <NavbarBrand href="/">GGimG</NavbarBrand>
+            <NavbarBrand href="/">Higallery</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/feed/">Feed</NavLink>
+                  <NavLink href="/">Feed</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/tags">Album</NavLink>
+                  <NavLink href="/albums">Albums</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/tags">Upload</NavLink>
+                  <NavLink href="/upload">Upload</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>

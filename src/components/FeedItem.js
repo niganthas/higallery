@@ -3,7 +3,7 @@ import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
   CardSubtitle, CardBody } from 'reactstrap';
 
 export default ({feed}) => {
-  const isVideo = feed.images && feed.images[0].type == 'video/mp4'
+  const isVideo = feed.images && feed.images[0].type === 'video/mp4'
 
   const image = (feed.images && isVideo) ?
       <video width="100%" autoPlay src={feed.images[0].link}></video> :
@@ -15,7 +15,7 @@ export default ({feed}) => {
           <CardTitle>{feed.title}</CardTitle>
           <CardSubtitle>{feed.account_url}</CardSubtitle>
           <CardText>{feed.description}</CardText>
-          <Button>Button</Button>
+          {/*<Button>Button</Button>*/}
         </CardBody>
       </Card>
   )
