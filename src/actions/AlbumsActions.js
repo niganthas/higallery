@@ -1,6 +1,5 @@
-import ls from 'local-storage'
 
-export const ALBUM_GET = 'ALBUM_CREATE'
+export const ALBUM_GET = 'ALBUM_GET'
 
 
 export const ALBUM_CREATE = 'ALBUM_CREATE'
@@ -15,15 +14,15 @@ export const ALBUM_DELETE = 'ALBUM_DELETE'
 export const ALBUM_DELETE_SUCCESS = 'ALBUM_DELETE_SUCCESS'
 export const ALBUM_DELETE_FAILURE = 'ALBUM_DELETE_FAILURE'
 
-export function getAlbums(album) {
+export function getAlbums() {
   return {
-    type: INCREMENT_COUNTER,
-    album
+    type: ALBUM_GET,
   };
 }
 
-export function getAlbums() {
-  return dispatch => {
-    dispatch()
-  }
+export function createAlbum(album) {
+  return {
+    type: ALBUM_CREATE,
+    album
+  };
 }

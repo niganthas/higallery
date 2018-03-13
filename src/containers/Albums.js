@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
+import {createAlbum, getAlbums} from '../actions/AlbumsActions'
 import {
   Button,
   Modal,
@@ -9,6 +11,7 @@ import {
   InputGroupAddon,
   Input
 } from 'reactstrap'
+import {fetchFeed} from "../actions/FeedActions";
 
 class Albums extends Component {
 
@@ -31,21 +34,29 @@ class Albums extends Component {
   }
 
   handleSubmit = (e) => {
-    const album = {name: this.state.createAlbumName, items: []}
+    const album = {name: this.state.createAlbumName, imgs: []}
     this.setState({
       showCreateModal: false,
       albums: [...this.state.albums,  album]
     });
-
+    this.props.dispatch(createAlbum(album))
     e.preventDefault()
   }
 
+
+  componentWillMount() {
+    this.props.dispatch(getAlbums())
+  }
+
+
   render() {
-    const albums = this.state.albums.map((album, index) => {
+    const {items, loading} = this.props.albums.albums
+    console.log(items)
+    const albumList = items.map((album, index) => {
       return (
           <div className='albums-list__item' key={index}>
             <h5>{album.name}</h5>
-            <p>Imgs count: {album.items.length}</p>
+            <p>Imgs count: {album.imgs.length}</p>
             <Button color="primary">View</Button> {''}
             <Button outline color="secondary">Eidt</Button> {''}
             <Button outline color="danger">Delete</Button>
@@ -58,7 +69,7 @@ class Albums extends Component {
           <h1>Albums</h1>
           <div><Button onClick={this.toggleCreateAlbum}>create</Button></div>
           <div className='albums-list'>
-            {albums}
+            {albumList}
           </div>
           <Modal isOpen={this.state.showCreateModal} toggle={this.toggleCreateAlbum}>
             <form onSubmit={this.handleSubmit}>
@@ -80,5 +91,10 @@ class Albums extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    albums: state.albums
+  }
+}
 
-export default Albums;
+export default connect(mapStateToProps)(Albums);

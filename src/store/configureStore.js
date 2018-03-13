@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import {routerMiddleware} from 'react-router-redux'
 import thunk from 'redux-thunk'
 import { apiMiddleware } from 'redux-api-middleware';
+import lsmw from '../middleware/localStorage';
 
 import rootReducer from '../reducers'
 
@@ -12,7 +13,7 @@ const configureStore = (preloadedState, browserHistory) => {
       rootReducer,
       preloadedState,
       compose(
-          applyMiddleware(thunk, routemw, apiMiddleware),
+          applyMiddleware(thunk, routemw, apiMiddleware, lsmw),
           window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
       )
   )

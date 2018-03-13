@@ -13,7 +13,10 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case ALBUM_GET :
       console.log(action)
-      return {...state, albums: {items:[], error: null, loading: false}}
+      return {...state, albums: {items:action.albums, error: null, loading: false}}
+    case ALBUM_CREATE :
+      console.log(action)
+      return {...state, albums: {items:action.albums, error: null, loading: false}}
     default:
       return state
   }

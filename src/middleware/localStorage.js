@@ -5,15 +5,15 @@ import {
 
 export default (store) => (next) => (action) => {
   if (action.type === ALBUM_GET) {
-    if (localStorage.getItem('albums') !== action.payload) {
-      localStorage.setItem('albums', action.payload);
-    }
+    const albums = JSON.parse(localStorage.getItem('albums')) || []
+    return next({...action, albums})
   }
 
   if (action.type === ALBUM_CREATE) {
-    if (localStorage.getItem('albums') !== action.payload) {
-      localStorage.setItem('albums', action.payload);
-    }
+    const albums = JSON.parse(localStorage.getItem('albums')) || []
+    albums.push(action.album)
+    localStorage.setItem('albums', JSON.stringify(albums))
+    return next({...action, albums})
   }
 
   return next(action)
