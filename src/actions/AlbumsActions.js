@@ -1,5 +1,5 @@
 
-export const ALBUM_GET = 'ALBUM_GET'
+export const ALBUMS_GET = 'ALBUMS_GET'
 
 
 export const ALBUM_CREATE = 'ALBUM_CREATE'
@@ -16,13 +16,20 @@ export const ALBUM_DELETE_FAILURE = 'ALBUM_DELETE_FAILURE'
 
 export function getAlbums() {
   return {
-    type: ALBUM_GET,
+    type: ALBUMS_GET,
   };
 }
 
 export function createAlbum(album) {
   return {
     type: ALBUM_CREATE,
+    album
+  };
+}
+
+export function deleteAlbum(album) {
+  return {
+    type: ALBUM_DELETE,
     album
   };
 }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux'
-import {createAlbum, getAlbums} from '../actions/AlbumsActions'
+import { Link } from 'react-router-dom'
+import {createAlbum, getAlbums, deleteAlbum} from '../actions/AlbumsActions'
+import {id} from '../utils/utils'
 import {
   Button,
   Modal,
@@ -18,7 +20,6 @@ class Albums extends Component {
   state = {
     showCreateModal: false,
     createAlbumName: null,
-    albums: []
   }
 
   toggleCreateAlbum = () => {
@@ -34,13 +35,22 @@ class Albums extends Component {
   }
 
   handleSubmit = (e) => {
-    const album = {name: this.state.createAlbumName, imgs: []}
+    const album = {
+      id: id(),
+      name: this.state.createAlbumName,
+      imgs: []
+    }
     this.setState({
       showCreateModal: false,
-      albums: [...this.state.albums,  album]
     });
     this.props.dispatch(createAlbum(album))
     e.preventDefault()
+  }
+
+  handleDelete = (e,id) => {
+    const {albums} = this.props.album
+    const deletedAlbum =  albums.items.find(album => album.id === id)
+    this.props.dispatch(deleteAlbum(deletedAlbum))
   }
 
 
@@ -50,16 +60,15 @@ class Albums extends Component {
 
 
   render() {
-    const {items, loading} = this.props.albums.albums
-    console.log(items)
-    const albumList = items.map((album, index) => {
+    const {items, loading} = this.props.album.albums
+    const albumList = items && items.map((album) => {
       return (
-          <div className='albums-list__item' key={index}>
+          <div className='albums-list__item' key={album.id}>
             <h5>{album.name}</h5>
             <p>Imgs count: {album.imgs.length}</p>
-            <Button color="primary">View</Button> {''}
+            <Link to={'/album/'+album.id} className="btn btn-primary">View</Link> {''}
             <Button outline color="secondary">Eidt</Button> {''}
-            <Button outline color="danger">Delete</Button>
+            <Button outline color="danger" onClick={(e)=> this.handleDelete(e, album.id)}>Delete</Button>
           </div>
       )
     })
@@ -93,7 +102,7 @@ class Albums extends Component {
 
 const mapStateToProps = state => {
   return {
-    albums: state.albums
+    album: state.album
   }
 }
 

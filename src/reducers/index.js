@@ -8,6 +8,6 @@ import AlbumsReducer from './AlbumsReducer'
 
 export default combineReducers({
   feed : feedReducer,
-  albums : AlbumsReducer,
+  album : AlbumsReducer,
   routing: routerReducer,
 });
